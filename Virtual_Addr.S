@@ -76,7 +76,7 @@ crash_backward:
 	          sfence.vma        // To Flush Local Memory/TLB
 		  
 		   //# Set up MPRV with MPP=S and SUM=1, so loads and stores use S-mode and S can access U pages
-		  li a1, ((MSTATUS_MPP & ~(MSTATUS_MPP<<1)) * PRV_S) | ;
+		  li a1, ((MSTATUS_MPP & ~(MSTATUS_MPP<<1)) * PRV_S) | MSTATUS_MXR | MSTATUS_SUM;
 		  csrs mstatus, a1
 		  mret 
 		  //# Do a store to MY_VA
